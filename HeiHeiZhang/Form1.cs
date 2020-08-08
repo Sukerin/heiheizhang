@@ -17,15 +17,18 @@ namespace HeiHeiZhang
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
-            int[,] f = new int[5,9];
-            int[] w = {  0,2, 3, 4, 10 };
-            int[] v = {  0,3, 4, 5, 8 };
+            int packageCapacity = 800;
+            int[] w = { 0, 200, 300, 400, 500 };
+            int[] v = { 0, 3, 4, 5, 8 };
+            int goodsNum = w.Length;
+            int[,] f = new int[goodsNum, packageCapacity+1];
+            
 
-            for (int i = 1; i < 5; i++)
+            for (int i = 1; i < goodsNum; i++)
             {
-                for (int j = 1; j < 9; j++)
+                for (int j = 1; j <= packageCapacity; j++)
                 {
                     if (w[i] > j)
                     {
@@ -38,11 +41,11 @@ namespace HeiHeiZhang
                 }
             }
             /*打印*/
-            for (int i = 1; i < 5; i++)
+            for (int i = 1; i < goodsNum; i++)
             {
-                for (int j = 1; j < 9; j++)
+                for (int j = 1; j <= packageCapacity; j++)
                 {
-                    Console.Write("f{0}{1}-{2} ",i,j ,f[i, j]);
+                    Console.Write("f[{0},{1}]-{2} ",i,j ,f[i, j]);
                 }
                 Console.Write("\n");
             }
