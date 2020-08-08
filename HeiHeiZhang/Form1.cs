@@ -26,7 +26,7 @@ namespace HeiHeiZhang
         {
             int packageCapacity = 800;
             int[] w = { 0, 200, 300, 400, 500 };
-            int[] v = { 0, 3, 4, 5, 8 };
+            int[] v = { 0, 301, 401, 602, 601 };
             int goodsNum = w.Length;
             int[,] f = new int[goodsNum, packageCapacity + 1];
             List<int> path = new List<int>();
@@ -46,39 +46,36 @@ namespace HeiHeiZhang
                 }
             }
 
-
-            for (int i = goodsNum - 1; i > 0; i--)
-            {
-                for (int j = packageCapacity; j >= 1; j--)
+            int f0 = goodsNum-1;
+            int f1 = packageCapacity;
+            
+            while (f0 > 0&&f1 > 0){
+                if (w[f0] > f1)
                 {
-                    if (w[i] > j)
-                    {
-                        //if (f[i - 1, j] != 0)
-                        //{
-                        //    path.Add(w[i]);
-                        //    break;
-                        //}
+                    f0 = f0 - 1;
+                  
+                }
+                else
+                {
 
-                        //f[i, j] = f[i - 1, j];
+                    int noDry = f[f0 - 1, f1];
+                    int dry = f[f0 - 1, f1 - w[f0]] + v[f0];
+                    if (noDry > dry)
+                    {
+                        f0 = f0 - 1;
                     }
                     else
                     {
-                        int noDry = f[i - 1, j];
-                        int dry = f[i - 1, j - w[i]] + v[i];
-                        if (noDry > dry)
-                        {
+                        path.Add(f0);
 
-                        }
-                        else
-                        {
-                            path.Add(w[i]);
-                            break;
+                        f1 = f1 - w[f0];
+                        f0 = f0 - 1;
 
-                        }
                     }
                 }
-
             }
+
+           
             foreach (int str in path) Console.WriteLine(str);
 
             Console.WriteLine("f[{0},{1}]-{2} ", goodsNum - 1, packageCapacity, f[goodsNum - 1, packageCapacity]);
@@ -96,6 +93,11 @@ namespace HeiHeiZhang
             //  }
 
 
+
+        }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
 
         }
     }
